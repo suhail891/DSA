@@ -1,4 +1,4 @@
-package Graphs;
+
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -74,3 +74,4 @@ public class Prims {
         prims(graph,1);
     }
 }
+
