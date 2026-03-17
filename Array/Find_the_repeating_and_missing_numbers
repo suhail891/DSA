@@ -1,0 +1,24 @@
+class Find_the_repeating_and_missing_numbers{
+
+ public static int[] bruteForce(int[]  ar){
+        int[] result=new int[2];
+        for (int i = 1; i <=ar.length; i++) {
+            int freq=0;
+            for (int j = 0; j < ar.length; j++) {
+                if (ar[j]==i){
+                    freq+=1;
+                }
+            }
+            if (freq>=2){
+                result[0]=i;
+            }
+            if (freq==0){
+                result[1]=i;
+            }
+       // Stop early if both found
+            if (result[0] != 0 && result[1] != 0)
+                break;
+        }
+        return result;
+    }
+}
