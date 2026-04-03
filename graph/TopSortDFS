@@ -1,0 +1,26 @@
+class TopSortDFS {
+    private void dfs(List<List<Integer>> adj,boolean[] vist,Stack<Integer> st, int curr){
+        vist[curr]=true;
+        for(int e:adj.get(curr)){
+            if(!vist[e]){
+                dfs(adj,vist,st,e);
+            }
+        }
+        st.push(curr);
+    }
+    public int[] topoSort(int V, List<List<Integer>> adj) {
+        //first i am going to solve this problem using dfs 
+        // traverse for all vertex
+        boolean[] vist=new boolean[V];
+        Stack<Integer> st=new Stack<>();
+        for(int i=0;i< V;i++){
+            dfs(adj,vist,st,i);
+        }
+        int[] ans=new int[ V];
+        int i=0;
+        while(!st.isEmpty()){
+            ans[i]=st.pop();
+        }
+        return ans;
+    }
+}
