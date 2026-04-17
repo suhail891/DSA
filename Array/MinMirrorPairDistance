@@ -1,0 +1,41 @@
+class Solution {
+    private boolean reverse(int n, int m){
+        int revN=0;
+        while(n>0){
+            revN=revN*10+n%10;
+            n=n/10;
+        }
+        if(revN==m){
+            return true;
+        }
+        // int revM=0;
+        // while(m>0){
+        //     revM=revM*10+m%10;
+        //     m=m/10;
+        // }
+        // if(revM==n){
+        //     return true;
+        // }
+        return false;
+    }
+    public int minMirrorPairDistance(int[] nums) {
+        //lets try it with brute forec approach
+        int ans=Integer.MAX_VALUE;
+        boolean flag=false;
+        int n=nums.length;
+        for (int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                if(reverse(nums[i],nums[j])){
+                    ans=Math.min(ans,Math.abs(i-j));
+                    flag=true;
+                }
+            }
+        }
+        if(flag){
+            return ans;
+        }
+        return -1;
+       
+
+    }
+}
