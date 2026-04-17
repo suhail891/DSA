@@ -1,3 +1,39 @@
+
+//optimize solution
+class Solution {
+    private int reverse(int n){
+        int revN=0;
+        while(n>0){
+            revN=revN*10+n%10;
+            n=n/10;
+        }
+        return revN;
+    }
+    public int minMirrorPairDistance(int[] nums) {
+        //lets try it with brute forec approach
+        int ans=Integer.MAX_VALUE;
+        boolean flag=false;
+        int n=nums.length;
+        HashMap<Integer, Integer> map=new HashMap<>();
+        for (int i=0;i<n;i++){
+           if(!map.containsKey(nums[i])){
+            map.put(reverse(nums[i]),i);
+           }else{
+            ans=Math.min(ans,Math.abs(i-map.get(nums[i])));
+            map.put(reverse(nums[i]),i);
+            flag=true;
+           }
+        }
+        if(flag){
+            return ans;
+        }
+        return -1;
+       
+
+    }
+}
+
+//brute force solution
 class Solution {
     private boolean reverse(int n, int m){
         int revN=0;
