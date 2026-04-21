@@ -1,0 +1,45 @@
+class Solution {
+    private void dfs(List<List<Integer>> graph, int curr, boolean[] visit, List<Integer> component){
+        visit[curr]=true;
+        component.add(curr);
+        for(int neig:graph.get(curr)){
+            if(!visit[neig]){
+                dfs(graph, neig, visit, component);
+            }
+        }
+    }
+    public int minimumHammingDistance(int[] source, int[] target, int[][] allowedSwaps) {
+        // create a graph 
+        int n=source.length;
+        List<List<Integer>> graph=new ArrayList<>();
+        for(int i=0;i<n; i++){
+            graph.add(new ArrayList<>());
+        }
+        for(int[] e:allowedSwaps){
+           graph.get(e[0]).add(e[1]);
+            graph.get(e[1]).add(e[0]);
+        }
+        // create a visited array
+        boolean[] visit=new boolean[n];
+        int HammingDistance=0;
+        for(int i=0;i<n;i++){
+            if(visit[i]!=true){
+                List<Integer> component=new ArrayList<>();
+                dfs(graph, i, visit, component);
+                Map<Integer,Integer> map=new HashMap<>();
+                for(int idx:component){
+                    map.put(source[idx],map.getOrDefault(source[idx],0)+1);
+                }
+                for(int idx:component){
+                    int value=target[idx];
+                    if(map.containsKey(value) && map.get(value)>0){
+                        map.put(value,map.get(value)-1);
+                    }else{
+                        HammingDistance++;
+                    }
+                }
+            }
+        }
+        return HammingDistance;
+    }
+}
