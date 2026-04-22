@@ -1,0 +1,25 @@
+class Solution {
+    public List<String> twoEditWords(String[] queries, String[] dictionary) {
+        //brute force
+        List<String> ans=new ArrayList<>();
+
+        for(String query : queries){
+            for(String dict : dictionary){
+                //check both words length is equal or not
+                if(query.length()==dict.length()){
+                    int changes=0;
+                    for(int i=0; i<query.length(); i++){
+                        if(query.charAt(i)!=dict.charAt(i)){
+                            changes++;
+                        }
+                    }
+                    if(changes<=2){
+                        ans.add(query);
+                        break;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+}
